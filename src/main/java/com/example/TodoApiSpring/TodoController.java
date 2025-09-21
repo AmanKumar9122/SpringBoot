@@ -18,8 +18,8 @@ public class TodoController {
     }
 
     @GetMapping("/todos")
-    public List<Todo> getTodos(){
-        return todoList;
+    public ResponseEntity <List<Todo>> getTodos(){
+        return ResponseEntity.status(HttpStatus.OK).body(todoList);
     }
 
     @PostMapping("/todos")
@@ -27,6 +27,16 @@ public class TodoController {
     public ResponseEntity <Todo> createTodo(@RequestBody Todo newTodo){
         todoList.add(newTodo);
         return ResponseEntity.status(HttpStatus.CREATED).body(newTodo);
+    }
+
+    @GetMapping("/todos/{todoId}")
+    public ResponseEntity <Todo> getTodoById(@PathVariable int todoId){
+        for(Todo todo : todoList){
+            if(todo.getId()==todoId){
+                return ResponseEntity.ok(todo);
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 
 
