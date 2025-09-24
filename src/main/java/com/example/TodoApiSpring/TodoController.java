@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/api/v1/todos")
 public class TodoController {
     private static List<Todo> todoList;
+    private static final String TODO_NOT_FOUND = "Todo not found";
 
     public TodoController(){
         todoList  = new ArrayList<>();
@@ -31,15 +32,16 @@ public class TodoController {
     }
 
     @GetMapping("{todoId}")
-    public ResponseEntity <Todo> getTodoById(@PathVariable int todoId){
+    public ResponseEntity <?> getTodoById(@PathVariable int todoId){
+        // in java {?} is a wildcard (anything can come over there
         for(Todo todo : todoList){
             if(todo.getId()==todoId){
                 return ResponseEntity.ok(todo);
             }
         }
-        return ResponseEntity.notFound().build();
+        //return ResponseEntity.notFound().build();
+        // along with 404 status code, try send a json {message: JSON NOT FOUND};
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(TODO_NOT_FOUND);
     }
-
-
 }
 
