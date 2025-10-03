@@ -37,7 +37,7 @@ public class TodoController {
     // query params
     public ResponseEntity <List<Todo>> getTodos(@RequestParam(required = false, defaultValue = "true") boolean isCompleted){
         // if we don't pass query params then 400 Bad Request will come.
-        System.out.println("Incoming query param " + isCompleted + " " + this.todoService.doSomething());
+        System.out.println("Incoming query param " + isCompleted + " " + this.todoService2.doSomething());
         return ResponseEntity.status(HttpStatus.OK).body(todoList);
     }
 
