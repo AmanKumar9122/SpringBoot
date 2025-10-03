@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 public class FakeTodoService implements  TodoService{
     @TimeMonitor
     public String doSomething(){
+        // for(int i=0;i<3000000;i++){};
         return "Something";
     }
 }

@@ -1,5 +1,6 @@
 package com.example.TodoApiSpring;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -27,7 +28,7 @@ public class TimeMonitorAspect {
     // pointcut: expression to select join points
     // uses: to log time taken by methods annotated with @TimeMonitor
 
-    @Before("@annotation(TimeMonitor)") // advice
+    // @Before("@annotation(TimeMonitor)") // advice
     // @After("@annotation(TimeMonitor)") // advice
 
     // even after using @After it will print before because the method is very small
@@ -43,7 +44,20 @@ public class TimeMonitorAspect {
     // but it will reduce the performance of the application
     // so we can use logger instead of System.out.println
 
-    public void logTime() {
-        System.out.println("Logging time: ");
+    @Around("@annotation(TimeMonitor)")
+    public void logTime(ProceedingJoinPoint joinPoint) {
+        long startTime = System.currentTimeMillis();
+        System.out.println("Logging time before method execution: " + startTime);
+        try {
+            // proceed(): to execute the method
+            joinPoint.proceed();
+        } catch (Throwable e) {
+            System.out.println("Something went wrong during the execution");
+        }
+        finally {
+            long endTime = System.currentTimeMillis();
+            System.out.println("Logging time after method execution: " + endTime);
+            System.out.println("Time taken by method: " + (endTime - startTime) + " ms");
+        }
     }
 }
