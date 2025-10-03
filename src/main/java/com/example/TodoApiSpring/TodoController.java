@@ -51,7 +51,7 @@ public class TodoController {
     @GetMapping("{todoId}")
     // body params
     public ResponseEntity <?> getTodoById(@PathVariable int todoId){
-        // in java {?} is a wildcard (anything can come over there
+        // in java {?} is a wildcard (anything can come over there)
         for(Todo todo : todoList){
             if(todo.getId()==todoId){
                 return ResponseEntity.ok(todo);
