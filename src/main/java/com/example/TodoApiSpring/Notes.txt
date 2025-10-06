@@ -62,3 +62,12 @@ JPA Architecture - It consists of three main components: Entity Manager, Entity,
 Spring Data JPA - It is a part of the Spring Framework that provides a way to simplify database interactions using JPA.
                     It provides a set of interfaces and classes that make it easy to perform CRUD operations and query the database.
 
+Javax Persistence - It is a package that contains the JPA API and related classes.
+                    It provides a way to manage relational data in Java applications.
+
+Jakarta Persistence - It is the new name for Javax Persistence after the transition of Java EE to Eclipse Foundation.
+                    It contains the same JPA API and related classes as Javax Persistence.
+
+Lombok - It is a Java library that provides a set of annotations to reduce boilerplate code.
+            It is used to generate getters, setters, constructors, and other common methods.
+
